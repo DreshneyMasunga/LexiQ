@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useState, type DragEvent } from 'react';
-import { UploadCloud, Loader2, File as FileIcon } from 'lucide-react';
+import { UploadCloud, Loader2, File as FileIcon, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
@@ -62,50 +62,55 @@ export function FileUploader({ onFileUpload, isLoading }: FileUploaderProps) {
 
   return (
     <div className="flex flex-col items-center justify-center text-center w-full max-w-2xl mx-auto pt-8">
-      <h2 className="text-3xl font-bold tracking-tight mb-2 font-headline">Analyze Your Contract Instantly</h2>
+      <div className="bg-primary/10 p-3 rounded-full mb-6 border border-primary/20 shadow-lg">
+        <Sparkles className="h-8 w-8 text-primary" />
+      </div>
+      <h1 className="text-4xl font-bold tracking-tight mb-4">Analyze Your Contract Instantly</h1>
       <p className="text-muted-foreground mb-8 max-w-md">
         Upload your contract PDF to get an AI-powered analysis of key clauses and potential risks in seconds.
       </p>
-      <form className="w-full" onSubmit={(e) => e.preventDefault()} onDragEnter={handleDrag}>
-        <input
-          ref={inputRef}
-          type="file"
-          id="file-upload"
-          className="hidden"
-          accept="application/pdf"
-          onChange={handleChange}
-          disabled={isLoading}
-        />
-        <label
-          htmlFor="file-upload"
-          className={`relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer bg-card hover:bg-secondary transition-colors ${
-            dragActive ? 'border-primary' : 'border-border'
-          }`}
-        >
-          {dragActive && <div className="absolute inset-0 w-full h-full rounded-lg" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}
-          
-          {isLoading ? (
-            <div className="flex flex-col items-center gap-4">
-              <Loader2 className="h-16 w-16 animate-spin text-primary" />
-              <p className="text-lg font-medium">Analyzing your document...</p>
-              {fileName && <p className="text-sm text-muted-foreground flex items-center gap-2"><FileIcon className="h-4 w-4" /> {fileName}</p>}
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <UploadCloud className="w-10 h-10 mb-4 text-muted-foreground" />
-              <p className="mb-2 text-sm text-muted-foreground">
-                <span className="font-semibold text-primary">Click to upload</span> or drag and drop
-              </p>
-              <p className="text-xs text-muted-foreground">PDF only (max. 10MB)</p>
-            </div>
-          )}
-        </label>
-      </form>
-      {!isLoading && (
-        <Button onClick={onButtonClick} className="mt-6" size="lg">
-          Select File
-        </Button>
-      )}
+      <div className="w-full">
+        <form className="w-full" onSubmit={(e) => e.preventDefault()} onDragEnter={handleDrag}>
+          <input
+            ref={inputRef}
+            type="file"
+            id="file-upload"
+            className="hidden"
+            accept="application/pdf"
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+          <label
+            htmlFor="file-upload"
+            className={`relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl cursor-pointer bg-secondary/50 hover:bg-secondary/80 transition-colors ${
+              dragActive ? 'border-primary' : 'border-border'
+            }`}
+          >
+            {dragActive && <div className="absolute inset-0 w-full h-full rounded-lg" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}
+            
+            {isLoading ? (
+              <div className="flex flex-col items-center gap-4 text-foreground">
+                <Loader2 className="h-16 w-16 animate-spin text-primary" />
+                <p className="text-lg font-medium">Analyzing your document...</p>
+                {fileName && <p className="text-sm text-muted-foreground flex items-center gap-2"><FileIcon className="h-4 w-4" /> {fileName}</p>}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center pt-5 pb-6 text-foreground">
+                <UploadCloud className="w-10 h-10 mb-4 text-muted-foreground" />
+                <p className="mb-2 text-base">
+                  <span className="font-semibold text-primary">Click to upload</span> or drag and drop
+                </p>
+                <p className="text-sm text-muted-foreground">PDF only (max. 10MB)</p>
+              </div>
+            )}
+          </label>
+        </form>
+        {!isLoading && (
+          <Button onClick={onButtonClick} className="mt-8" size="lg">
+            Select Contract File
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

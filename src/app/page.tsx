@@ -64,16 +64,18 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground font-body">
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8 md:py-12">
-        {analysis ? (
-          <AnalysisView analysis={analysis} onReset={handleReset} />
-        ) : (
-          <FileUploader onFileUpload={handleFileAnalysis} isLoading={isLoading} />
-        )}
+      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="max-w-4xl mx-auto">
+          {analysis ? (
+            <AnalysisView analysis={analysis} onReset={handleReset} />
+          ) : (
+            <FileUploader onFileUpload={handleFileAnalysis} isLoading={isLoading} />
+          )}
+        </div>
       </main>
-      <footer className="py-4 text-center text-sm text-muted-foreground">
+      <footer className="py-6 text-center text-sm text-muted-foreground">
         <p>LexiQ Contract Analysis. For informational purposes only. Not legal advice.</p>
       </footer>
       <Toaster />
