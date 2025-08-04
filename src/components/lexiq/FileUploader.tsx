@@ -62,11 +62,11 @@ export function FileUploader({ onFileUpload, isLoading }: FileUploaderProps) {
 
   return (
     <div className="flex flex-col items-center justify-center text-center w-full max-w-2xl mx-auto pt-8">
-      <div className="bg-primary/10 p-3 rounded-full mb-6 border border-primary/20 shadow-lg">
-        <Sparkles className="h-8 w-8 text-primary" />
+       <div className="bg-primary/10 p-4 rounded-full mb-6 border-2 border-primary/20 shadow-lg shadow-primary/10">
+        <Sparkles className="h-10 w-10 text-primary" />
       </div>
-      <h1 className="text-4xl font-bold tracking-tight mb-4">Analyze Your Contract Instantly</h1>
-      <p className="text-muted-foreground mb-8 max-w-md">
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-br from-white to-neutral-400">Analyze Your Contract Instantly</h1>
+      <p className="text-lg text-muted-foreground mb-8 max-w-md">
         Upload your contract PDF to get an AI-powered analysis of key clauses and potential risks in seconds.
       </p>
       <div className="w-full">
@@ -82,8 +82,8 @@ export function FileUploader({ onFileUpload, isLoading }: FileUploaderProps) {
           />
           <label
             htmlFor="file-upload"
-            className={`relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl cursor-pointer bg-secondary/50 hover:bg-secondary/80 transition-colors ${
-              dragActive ? 'border-primary' : 'border-border'
+            className={`relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl cursor-pointer bg-card hover:bg-accent transition-all duration-300 ease-in-out ${
+              dragActive ? 'border-primary scale-105 shadow-2xl shadow-primary/20' : 'border-border'
             }`}
           >
             {dragActive && <div className="absolute inset-0 w-full h-full rounded-lg" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}
@@ -96,11 +96,11 @@ export function FileUploader({ onFileUpload, isLoading }: FileUploaderProps) {
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center pt-5 pb-6 text-foreground">
-                <UploadCloud className="w-10 h-10 mb-4 text-muted-foreground" />
+                <UploadCloud className="w-12 h-12 mb-4 text-muted-foreground" />
                 <p className="mb-2 text-base">
                   <span className="font-semibold text-primary">Click to upload</span> or drag and drop
                 </p>
-                <p className="text-sm text-muted-foreground">PDF only (max. 10MB)</p>
+                <p className="text-sm text-muted-foreground">PDF only (max. 50MB)</p>
               </div>
             )}
           </label>

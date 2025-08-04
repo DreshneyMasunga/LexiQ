@@ -12,7 +12,7 @@ export async function analyzeContractAction(input: ActionInput) {
     const { pdfDataUri } = input;
     
     const clauseIdentificationResult = await identifyContractClauses({ pdfDataUri });
-    const { clauses } = clauseIdentificationResult;
+    const { clauses, language } = clauseIdentificationResult;
 
     if (!clauses || clauses.length === 0) {
       return { error: 'No clauses were identified in the document. The document might be empty, unreadable, or not a valid contract.' };
@@ -20,7 +20,7 @@ export async function analyzeContractAction(input: ActionInput) {
     
     const contractText = clauses.map(clause => `Clause Type: ${clause.type}\nText: ${clause.text}`).join('\n\n---\n\n');
 
-    const riskAssessmentResult = await assessContractRisk({ contractText });
+    const riskAssessmentResult = await assessContractRisk({ contractText, language });
     const { riskAssessment: risks } = riskAssessmentResult;
 
     return {

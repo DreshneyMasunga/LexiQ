@@ -29,6 +29,7 @@ const IdentifiedClauseSchema = z.object({
 
 const IdentifyContractClausesOutputSchema = z.object({
   clauses: z.array(IdentifiedClauseSchema).describe('A list of identified clauses in the contract.'),
+  language: z.string().describe('The primary language of the document (e.g., "English", "Spanish").'),
 });
 export type IdentifyContractClausesOutput = z.infer<typeof IdentifyContractClausesOutputSchema>;
 
@@ -44,10 +45,12 @@ const identifyContractClausesPrompt = ai.definePrompt({
   output: {schema: IdentifyContractClausesOutputSchema},
   prompt: `You are an expert legal document analyst.
 
-  Your task is to analyze the contract provided and identify key clauses such as Termination, Liability, Payment Terms, Intellectual Property, and Confidentiality.
-  For each identified clause, extract the clause type and the corresponding text.
-
-  Return the identified clauses in a JSON format.
+  Your task is to analyze the contract provided.
+  1. Identify the primary language of the document.
+  2. Identify key clauses such as Termination, Liability, Payment Terms, Intellectual Property, and Confidentiality.
+  3. For each identified clause, extract the clause type and the corresponding text.
+  
+  Return the identified clauses and the detected language in JSON format.
 
   Contract PDF: {{media url=pdfDataUri}}`,
 });
