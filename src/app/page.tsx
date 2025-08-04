@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </main>
       <footer className="py-6 text-center text-sm text-muted-foreground">
-        <p>LexiQ Contract Analysis. For informational purposes only. Not legal advice.</p>
+        <p>LexiQ Contract Analysis. For informational purposes only. Not legal advice. By Dreshney Masunga</p>
       </footer>
       <Toaster />
     </div>
